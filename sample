@@ -1,0 +1,120 @@
+	private int visibleCount = 0;
+	private String environment;
+	private static boolean pass = true;
+	private String EXECUTION_ENVIRONMENT;
+	private String SELENIUM_BROWSER;
+	private String SELENIUM_VERSION;
+	private String SELENIUM_PLATFORM;
+	private String jobID = null;
+	public WebDriver driver = null;
+	public SeleneseTestBase sb = new SeleneseTestBase();
+	public ArrayList<String> dataArray = new ArrayList<String>();
+	public final String pageLoad = "30000";
+	protected String TYPE = "type";
+	protected Map<String, String> userInfo = new HashMap<String, String>();
+	protected String SELECT = "select";
+	protected String SELECT_BY_VISIBLETEXT = "selectbyvisibletext";
+	protected String SELECT_BY_INDEX = "selectbyindex";
+	public final int PAGE_TIMEOUT_TIME = 30000;
+	public final long ACTION_TIMEOUT_TIME = 10000;
+	public final int CHECK_INTERVAL_TIME = 300;
+	public final Logger logger = Logger.getLogger(BaseTest.class);
+	public String port;
+	private String JOB_Name;
+	// JavascriptExecutor js =null;
+	public File directory = new File(".");
+	public String baseURL = null;
+	protected Ansi ansi = null;
+	File file = null;
+	public FileWriter fw = null;
+	public BufferedWriter write = null;
+	protected int i = 0;
+	protected String url = null;
+	public String jsonObject = null;
+	public String events = null;
+	public boolean halfWay = false;
+	public boolean videoCompletion = false;
+	public boolean eventFiringPrinted = false;
+	protected String quizIntro = "div#quiz-intro";
+	protected String header = "header h1";
+	protected String getResultsButton = "input[src*='button_get_results']";
+	protected String emailTextBox = "input#quiz-email";
+	protected Ansi ansiError = null;
+	String link = null;
+	String URLs[] = null;
+
+	int row_ct_loc = 19;
+	int url_ct = 4;
+	String locators[] = new String[row_ct_loc];
+	String descriptor[] = new String[row_ct_loc];
+	int neg_test_advt_row_num = 21;
+	String row_num;
+
+	List<WebElement> element = null;
+	protected JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	/**
+	 * Method verifies the size of an image.
+	 * 
+	 * @param checkpointDescription
+	 *            : Describe what kind of checkpoint is it ?
+	 * @param img_locator
+	 * @param expectedWidth
+	 * @param expectedHeight
+	 */
+
+	public void openHome() throws IOException {
+
+		String environment = this.environment;
+		File directory = new File(".");
+		try {
+			PropertyConfigurator.configure(directory.getCanonicalPath()
+					+ "/src/log4j.properties");
+		} catch (IOException e1) {
+			System.err
+					.println("Could not find the path of the current directory..!");
+			e1.printStackTrace();
+		}
+		System.out.println("Environment is " + environment);
+		if (environment.equalsIgnoreCase("QA")) {
+}
+system.setprpoerty("webdriver.ie.driver","ieserverdriver")
+DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+		this.JOB_Name = this.getClass().getSimpleName() + "_"
+				+ this.SELENIUM_BROWSER + "_" + this.SELENIUM_VERSION + "_"
+				+ this.SELENIUM_PLATFORM;
+		
+		if(SELENIUM_BROWSER.equalsIgnoreCase("safari")){
+			 String appData=System.getenv("APPDATA");
+			 desiredCapabilities.setCapability("safari.dataDir",appData+"\\Apple Computer\\Safari" );
+		}
+		desiredCapabilities.setCapability("name", this.JOB_Name);
+		desiredCapabilities.setCapability("command-timeout", 120);
+		desiredCapabilities.setCapability("idle-timeout", 120);
+		desiredCapabilities.setBrowserName(this.SELENIUM_BROWSER);
+		desiredCapabilities.setVersion(this.SELENIUM_VERSION);
+		desiredCapabilities.setCapability(CapabilityType.PLATFORM,
+				this.SELENIUM_PLATFORM);
+		String beforeHost = "";
+		if (System.getenv("EXECUTION_ENVIRONMENT")
+				.equalsIgnoreCase("SAUCELABS")) {
+			beforeHost = System.getenv("SAUCE_USER_NAME") + ":"
+					+ System.getenv("SAUCE_API_KEY") + "@";
+		}
+		URL url = new URL("http://"
+				+ beforeHost
+				+ (!System.getenv("EXECUTION_ENVIRONMENT").equalsIgnoreCase(
+						"SAUCELABS") ? System.getenv("INTERNAL_HOST")
+						: System.getenv("SELENIUM_HOST"))
+				+ ":"
+				+ (!System.getenv("EXECUTION_ENVIRONMENT").equalsIgnoreCase(
+						"SAUCELABS") ? System.getenv("INTERNAL_PORT")
+						: System.getenv("SELENIUM_PORT")) + "/wd/hub");
+		System.out.print("URL = " + url.toString());
+		driver = new RemoteWebDriver(url, desiredCapabilities);
+		if(!SELENIUM_BROWSER.equalsIgnoreCase("safari")){
+			driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+		}
+		js = (JavascriptExecutor) driver;
+		driver.get(baseURL);
+	}
