@@ -1,0 +1,6 @@
+package com.Softcrylic.Intf;
+
+public abstract interface Exception
+{
+  public abstract Throwable getException();
+}
