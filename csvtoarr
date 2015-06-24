@@ -1,0 +1,33 @@
+package com.Softcrylic;
+
+import com.Softcrylic.Exceptions.InvalidPackageNameException;
+import com.Softcrylic.Exceptions.InvalidTestNameException;
+import com.Softcrylic.Throwables.ContainsSpace;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CSVToArray
+{
+  public static List<String> parse(String CSV)
+    throws InvalidTestNameException, InvalidPackageNameException
+  {
+    if (CSV == null) {
+      return null;
+    }
+    List<String> collection = new ArrayList();
+    String[] _coll = CSV.split(",");
+    for (int i = 0; i < _coll.length; i++)
+    {
+      if (_coll[i].contains(" ")) {
+        throw new InvalidTestNameException(
+          new ContainsSpace(_coll[i]));
+      }
+      if (System.getenv("PACKAGE_NAME").contains(" ")) {
+        throw new InvalidPackageNameException(
+          new ContainsSpace(System.getenv("PACKAGE_NAME")));
+      }
+      collection.add(System.getenv("PACKAGE_NAME") + "." + _coll[i]);
+    }
+    return collection;
+  }
+}
