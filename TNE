@@ -1,0 +1,30 @@
+package com.Softcrylic.Exceptions;
+
+public class InvalidTestNameException
+  extends Exception
+  implements com.Softcrylic.Intf.Exception
+{
+  private static final long serialVersionUID = 3480761691702333751L;
+  
+  public InvalidTestNameException() {}
+  
+  public InvalidTestNameException(String message)
+  {
+    super(message);
+  }
+  
+  public InvalidTestNameException(com.Softcrylic.Intf.Exception cause)
+  {
+    super(cause.getException());
+  }
+  
+  public InvalidTestNameException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+  {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
+  
+  public Throwable getException()
+  {
+    return this;
+  }
+}
