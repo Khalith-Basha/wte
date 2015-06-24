@@ -1,0 +1,117 @@
+package com.Softcrylic;
+
+import com.Softcrylic.Exceptions.InvalidArgumentException;
+import com.Softcrylic.Exceptions.InvalidPackageNameException;
+import com.Softcrylic.Exceptions.InvalidTestNameException;
+import com.Softcrylic.Throwables.ContainsSpace;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestNGFileGenerator
+{
+  private static String ThreadCount = null;
+  private static BrowserSelection browserSelection = null;
+  private static TestNGFile file;
+  private static List<String> classes = null;
+  
+  static
+  {
+    System.err.println("Called static block!!!!");
+    classes = new ArrayList();
+    browserSelection = new BrowserSelection();
+    try
+    {
+      ThreadCount = System.getenv("THREAD_COUNT").toLowerCase().equals("internal") ? 4 : 
+        8;
+    }
+    catch (Exception localException1) {}
+    try
+    {
+      file = new TestNGFile(ThreadCount == null ? 0 : 
+        Integer.parseInt(ThreadCount), browserSelection);
+    }
+    catch (NumberFormatException|IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+  
+  public static void main(String[] args)
+    throws IOException, InvalidArgumentException, InvalidTestNameException, InvalidPackageNameException
+  {
+    if (args.length == 0)
+    {
+      setBrowsers();
+      addTests();
+    }
+    else if (args != null)
+    {
+      int ArgsLength = 2;
+      if (args.length != ArgsLength) {
+        throw new InvalidArgumentException(
+          ArgsLength);
+      }
+      setBrowsers(args[0]);
+      addTests(args[1]);
+    }
+    writeFile();
+  }
+  
+  public static void addTests()
+    throws InvalidTestNameException, InvalidPackageNameException
+  {
+    String CSVClasses = System.getenv("SELECTED_TESTS");
+    classes = CSVToArray.parse(CSVClasses);
+  }
+  
+  public static void addTests(String className)
+    throws InvalidTestNameException
+  {
+    if (className.contains(" ")) {
+      throw new InvalidTestNameException(
+        new ContainsSpace(className));
+    }
+    classes.add(System.getenv("PACKAGE_NAME") + "." + className);
+  }
+  
+  public static void setBrowsers()
+  {
+    if (browserSelection != null) {
+      browserSelection = new BrowserSelection();
+    }
+  }
+  
+  public static void setBrowsers(String browsers)
+  {
+    browserSelection = new BrowserSelection(browsers);
+  }
+  
+  private static void addTestsBeforeWrite()
+  {
+    if (browserSelection.size() > 0) {
+      file.addTests(classes, browserSelection.getBrowsers());
+    } else {
+      file.addTests(classes);
+    }
+  }
+  
+  public static void writeFile()
+    throws IOException
+  {
+    addTestsBeforeWrite();
+    file.writeFile();
+  }
+  
+  public static void writeFile(String fileName)
+    throws IOException
+  {
+    addTestsBeforeWrite();
+    file.writeFile(fileName);
+    classes = new ArrayList();
+    browserSelection = new BrowserSelection();
+    file = new TestNGFile(ThreadCount == null ? 0 : 
+      Integer.parseInt(ThreadCount), browserSelection);
+  }
+}
