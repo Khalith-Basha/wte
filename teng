@@ -1,0 +1,109 @@
+package com.Softcrylic;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+public class TestNGFile
+{
+  private String stream;
+  private BufferedWriter out;
+  private BrowserSelection browserSelection;
+  
+  public TestNGFile()
+    throws IOException
+  {
+    this(0, null);
+  }
+  
+  public TestNGFile(int threadCount, BrowserSelection browserSelection)
+    throws IOException
+  {
+    String SuiteName = null;
+    this.browserSelection = browserSelection;
+    try
+    {
+      SuiteName = System.getenv("SUITE_NAME");
+    }
+    catch (Exception localException) {}
+    if (SuiteName == null) {
+      SuiteName = "suite";
+    }
+    this.stream = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE suite SYSTEM \"http://testng.org/testng-1.0.dtd\">\n<suite";
+    if (threadCount > 0) {
+      this.stream = (this.stream + " thread-count=\"" + threadCount + "\"");
+    }
+    this.stream = (this.stream + " name=\"" + SuiteName + "\" parallel=\"tests\">\n");
+  }
+  
+  public void addTests(List<String> classes)
+  {
+    if (classes == null) {
+      return;
+    }
+    for (String _class : classes) {
+      addTest(_class);
+    }
+  }
+  
+  public void addTests(List<String> classes, Set<String> browsers)
+  {
+    if (classes == null) {
+      return;
+    }
+    Iterator localIterator2;
+    for (Iterator localIterator1 = classes.iterator(); localIterator1.hasNext(); localIterator2.hasNext())
+    {
+      String _class = (String)localIterator1.next();
+      localIterator2 = browsers.iterator(); continue;String browser = (String)localIterator2.next();
+      addTest(_class, null, browser);
+    }
+  }
+  
+  public void addTest(String className)
+  {
+    addTest(className, null);
+  }
+  
+  public void addTest(String className, String methodName)
+  {
+    addTest(className, methodName, null);
+  }
+  
+  public void addTest(String className, String methodName, String browser)
+  {
+    this.stream = (this.stream + "\t<test name=\"" + (browser == null ? className : new StringBuilder(String.valueOf(className)).append("_").append(browser).toString()).replace(':', '_').replace(' ', '_').replace(new StringBuilder(String.valueOf(System.getenv("PACKAGE_NAME"))).append('.').toString(), "").replace("BROWSER_", "").replace("__", "_") + "\" preserve-order=\"true\">\n");
+    if (browser != null) {
+      this.stream = this.browserSelection.addParameters(this.stream, browser);
+    }
+    this.stream += "\t\t<classes>\n";
+    this.stream = (this.stream + "\t\t\t<class name=\"" + className + "\">\n");
+    if (methodName != null)
+    {
+      this.stream += "\t\t\t\t<methods>\n";
+      this.stream = (this.stream + "\t\t\t\t\t<include name=\"" + methodName + "\" />\n");
+      this.stream += "\t\t\t\t</methods>\n";
+    }
+    this.stream += "\t\t\t</class>\n";
+    this.stream += "\t\t</classes>\n";
+    this.stream += "\t</test>\n";
+  }
+  
+  public void writeFile()
+    throws IOException
+  {
+    writeFile("testng.xml");
+  }
+  
+  public void writeFile(String fileName)
+    throws IOException
+  {
+    this.stream += "</suite>";
+    this.out = new BufferedWriter(new FileWriter(fileName));
+    this.out.write(this.stream);
+    this.out.close();
+  }
+}
