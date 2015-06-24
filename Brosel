@@ -1,0 +1,68 @@
+package com.Softcrylic;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class BrowserSelection
+{
+  Set<String> browsers;
+  
+  public BrowserSelection()
+  {
+    Map<String, String> env_vars = System.getenv();
+    Set<String> env_keys = env_vars.keySet();
+    this.browsers = new HashSet();
+    for (String env_key : env_keys) {
+      if ((env_key.startsWith("BROWSER_")) && 
+        (((String)env_vars.get(env_key)).toString().equalsIgnoreCase("true"))) {
+        this.browsers.add(env_key);
+      }
+    }
+  }
+  
+  public BrowserSelection(String browser)
+  {
+    this.browsers = new HashSet();
+    this.browsers.add(browser);
+  }
+  
+  public String addParameters(String stream, String browser)
+  {
+    String[] params = browser.split(":");
+    if ((params.length > 0) && (params.length == 4))
+    {
+      stream = stream + addParameter("environment", System.getenv("environment"));
+      stream = stream + addParameter("EXECUTION_ENVIRONMENT", System.getenv("EXECUTION_ENVIRONMENT"));
+      stream = stream + addParameter("browserName", params[1]);
+      stream = stream + addParameter("browserVersion", params[2]);
+      stream = stream + addParameter("os", params[3]);
+    }
+    return stream;
+  }
+  
+  private String addParameter(String name, String value)
+  {
+    return 
+      "\t\t<parameter name=\"" + name + "\" value=\"" + value + "\" />\n";
+  }
+  
+  public Set<String> getBrowsers()
+  {
+    return this.browsers;
+  }
+  
+  public int size()
+  {
+    return this.browsers.size();
+  }
+  
+  public String toString()
+  {
+    String var = "";
+    for (String browser : this.browsers) {
+      var = var + browser + ',';
+    }
+    return var;
+  }
+}
