@@ -1,0 +1,25 @@
+package com.Softcrylic.Throwables;
+
+import com.Softcrylic.Intf.Exception;
+
+public class ContainsSpace
+  extends Throwable
+  implements Exception
+{
+  private static final long serialVersionUID = 4200439356510664831L;
+  
+  public ContainsSpace()
+  {
+    super("Contains space");
+  }
+  
+  public ContainsSpace(String str)
+  {
+    super("\n\"" + str + "\" Contains space");
+  }
+  
+  public Throwable getException()
+  {
+    return this;
+  }
+}
