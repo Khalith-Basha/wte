@@ -1,0 +1,33 @@
+package com.Softcrylic.Exceptions;
+
+public class InvalidArgumentException
+  extends Exception
+  implements com.Softcrylic.Intf.Exception
+{
+  private static final long serialVersionUID = 4389038462334219600L;
+  
+  public InvalidArgumentException()
+  {
+    this("Missing *BrowserName *TestClassName");
+  }
+  
+  public InvalidArgumentException(int length)
+  {
+    this("Lengh of the arguments should be " + length + "\n" + "Missing *BrowserName *TestClassName");
+  }
+  
+  public InvalidArgumentException(String message)
+  {
+    super(message);
+  }
+  
+  public InvalidArgumentException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+  {
+    super(message, cause, enableSuppression, writableStackTrace);
+  }
+  
+  public Throwable getException()
+  {
+    return this;
+  }
+}
