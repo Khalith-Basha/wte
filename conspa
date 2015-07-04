@@ -1,6 +1,4 @@
-package com.Softcrylic.Throwables;
 
-import com.Softcrylic.Intf.Exception;
 
 public class ContainsSpace
   extends Throwable
