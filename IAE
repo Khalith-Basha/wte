@@ -1,4 +1,3 @@
-package com.Softcrylic.Exceptions;
 
 public class InvalidArgumentException
   extends Exception
