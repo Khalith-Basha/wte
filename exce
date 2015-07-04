@@ -1,4 +1,3 @@
-package com.Softcrylic.Intf;
 
 public abstract interface Exception
 {
