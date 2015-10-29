@@ -1,7 +1,8 @@
 junit
 junit
 4.11
-test
+
+XCOPY test-output\testng-results.xml /Y "%WORKSPACE%\..\builds\%BUILD_ID%"
 
 info.cakes
 cucumber-java
