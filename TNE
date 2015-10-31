@@ -59,6 +59,10 @@ public ITestCase loginTest;
 }
 
 //Test
+
+qcConnection(getClass().toString());
+
+
 try {
 			steps s = new steps();
 			s.asds();
