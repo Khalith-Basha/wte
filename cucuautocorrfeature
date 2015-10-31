@@ -7,6 +7,11 @@ Feature: Automatically correct mistyped search terms
     And accept the first search result
     Then I should be on the page 'http://www.opencredo.com/'
     
+    
+    System.setProperty(
+				"jacob.dll.path",kkklTest.class.getResource("/WEB-INF/lib/jacob-1.14.3-x86.dll").getPath());
+		LibraryLoader.loadJacobLibrary();
+		
     <dependency>
 			<groupId>net.sf.jacob-project</groupId>
 			<artifactId>jacob</artifactId>
