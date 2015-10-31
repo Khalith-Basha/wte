@@ -77,6 +77,38 @@ Feature: Automatically correct mistyped search terms
   				</lifecycleMappingMetadata>
   			</configuration>
   		</plugin>
+  		<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src\main\resources\zip.xml</descriptor>
+					</descriptors>
+					<tarLongFileMode>posix</tarLongFileMode>
+				</configuration>
+			</plugin>  
   	</plugins>
   </pluginManagement>
 	</build>
+
+
+XML file Zip.xml
+
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>bundle</id>
+	<formats>
+	
+		<format>zip</format>
+		
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>target/surefire-reports</directory>
+			<outputDirectory>Report-output</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>
