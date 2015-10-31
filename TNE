@@ -1,30 +1,71 @@
+public ITestCase loginTest;
+	public ITestCaseRun testcaseRun;
+	public ALMServiceWrapper wrapper;
 
+	public void setTestExpected(String name) {
+		System.out.println(name);
+	}
 
-public class InvalidTestNameException
-  extends Exception
-  implements 
-{
-  private static final long serialVersionUID = 3480761691702333751L;
-  
-  public InvalidTestNameException() {}
-  
-  public InvalidTestNameException(String message)
-  {
-    super(message);
-  }
-  
-  public InvalidTestNameException(com.Softcrylic.Intf.Exception cause)
-  {
-    super(cause.getException());
-  }
-  
-  public InvalidTestNameException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
-  {
-    super(message, cause, enableSuppression, writableStackTrace);
-  }
-  
-  public Throwable getException()
-  {
-    return this;
-  }
+	public void setTestActual(String name) throws ALMServiceException {
+		System.out.println(name);
+		
+		testcaseRun = wrapper.createNewRun(loginTest, "Run 1", StatusAs.PASSED);
+		wrapper.addStep(testcaseRun, "Enter username", StatusAs.PASSED,
+				"Enters username", "enter", "enter");
+		
+	}
+
+	public void setTestActualFailed(String name) {
+		System.out.println(name);
+		testcaseRun = wrapper.createNewRun(loginTest, "Run 1", StatusAs.FAILED);
+		wrapper.addStep(testcaseRun, "Enter username", StatusAs.PASSED,
+				"Enters username", "enter", "enter");
+	}
+
+	public void qcConnection(String testCaseName) throws ALMServiceException {
+
+		wrapper = new ALMServiceWrapper("http://localhost:8081/qcbin");
+		wrapper.connect("admin", "admin", "DEFAULT", "SampleProject");
+
+		loginTest = wrapper.updateResult(
+				"SampleTestSetFolder\\SubTestSetFolder1", "TestSet1", 2,
+				testCaseName, StatusAs.NO_RUN);
+	}
+
+	public void updateResult(String testCaseName) throws ALMServiceException {
+		loginTest = wrapper.updateResult(
+				"SampleTestSetFolder\\SubTestSetFolder1", "TestSet1", 2,
+				testCaseName, StatusAs.PASSED);
+		wrapper.newAttachment("D:\\Data.xlsx", testCaseName,
+				loginTest);
+	}
+	
+	//Steps
+	public void asds() throws Exception{
+	try{
+	setTestExpected("");
+	//
+	//
+	/***
+	 * 
+	 */
+	setTestActual("");
+	}catch(Exception e)
+	{
+		setTestActualFailed("");
+		throw e;
+	}
+	
 }
+
+//Test
+try {
+			steps s = new steps();
+			s.asds();
+			updateResult(getClass().toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			updateResult(getClass().toString());
+
+		}
+
