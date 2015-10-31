@@ -6,3 +6,77 @@ Feature: Automatically correct mistyped search terms
     When I submit the search term 'opencredo'
     And accept the first search result
     Then I should be on the page 'http://www.opencredo.com/'
+    
+    <dependency>
+			<groupId>net.sf.jacob-project</groupId>
+			<artifactId>jacob</artifactId>
+			<version>1.14.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jacob-project</groupId>
+			<artifactId>jacob</artifactId>
+			<version>1.14.3</version>
+			<classifier>x86</classifier>
+			<type>dll</type>
+		</dependency>
+		<build>
+	
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-dependency-plugin</artifactId>
+      <executions>
+        <execution>
+          <id>copy-dependencies</id>
+          <phase>prepare-package</phase>
+          <goals>
+            <goal>copy-dependencies</goal>
+          </goals>
+          <configuration>
+            <excludeTransitive>true</excludeTransitive>
+            <includeArtifactIds>jacob</includeArtifactIds>
+            <includeTypes>dll</includeTypes>
+            <failOnMissingClassifierArtifact>true</failOnMissingClassifierArtifact>
+            <silent>false</silent>
+            <outputDirectory>target/test-classes/WEB-INF/lib</outputDirectory>
+            <overWriteReleases>true</overWriteReleases>
+            <overWriteSnapshots>true</overWriteSnapshots>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+  <pluginManagement>
+  	<plugins>
+  		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+  		<plugin>
+  			<groupId>org.eclipse.m2e</groupId>
+  			<artifactId>lifecycle-mapping</artifactId>
+  			<version>1.0.0</version>
+  			<configuration>
+  				<lifecycleMappingMetadata>
+  					<pluginExecutions>
+  						<pluginExecution>
+  							<pluginExecutionFilter>
+  								<groupId>
+  									org.apache.maven.plugins
+  								</groupId>
+  								<artifactId>
+  									maven-dependency-plugin
+  								</artifactId>
+  								<versionRange>[2.1,)</versionRange>
+  								<goals>
+  									<goal>copy-dependencies</goal>
+  								</goals>
+  							</pluginExecutionFilter>
+  							<action>
+  								<ignore></ignore>
+  							</action>
+  						</pluginExecution>
+  					</pluginExecutions>
+  				</lifecycleMappingMetadata>
+  			</configuration>
+  		</plugin>
+  	</plugins>
+  </pluginManagement>
+	</build>
