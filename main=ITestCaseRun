@@ -1,0 +1,6 @@
+package main;
+import classes.StepFactory;
+
+public abstract interface ITestCaseRun extends HasAttachmentFeature {
+	public abstract StepFactory getStepFactory();
+}
