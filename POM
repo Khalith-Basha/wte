@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>dasdasdas</groupId>
+	<artifactId>dasdasdasdas</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.jacob-project</groupId>
+			<artifactId>jacob</artifactId>
+			<version>1.14.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.jacob-project</groupId>
+			<artifactId>jacob</artifactId>
+			<version>1.14.3</version>
+			<classifier>x86</classifier>
+			<type>dll</type>
+		</dependency>
+	</dependencies>
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<excludeTransitive>true</excludeTransitive>
+							<includeArtifactIds>jacob</includeArtifactIds>
+							<includeTypes>dll</includeTypes>
+							<failOnMissingClassifierArtifact>true</failOnMissingClassifierArtifact>
+							<silent>false</silent>
+							<outputDirectory>target/test-classes/WEB-INF/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-dependency-plugin
+										</artifactId>
+										<versionRange>[2.1,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+
+				<!-- <plugin> -->
+				<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<!-- <artifactId>maven-assembly-plugin</artifactId> -->
+				<!-- <version>2.4</version> -->
+				<!-- <configuration> -->
+				<!-- <descriptors> -->
+				<!-- <descriptor>src/main/assembly/Zip.xml</descriptor> -->
+				<!-- </descriptors> -->
+				<!-- </configuration> -->
+				<!-- <executions> -->
+				<!-- <execution> -->
+				<!-- <id>make-assembly</id> this is used for inheritance merges -->
+				<!-- <phase>package</phase> append to the packaging phase. -->
+				<!-- <goals> -->
+				<!-- <goal>single</goal> goals == mojos -->
+				<!-- </goals> -->
+				<!-- <configuration> -->
+				<!-- <descriptorRefs> -->
+				<!-- <descriptorRef> -->
+				<!-- src -->
+				<!-- </descriptorRef> -->
+				<!-- </descriptorRefs> -->
+				<!-- </configuration> -->
+				<!-- </execution> -->
+				<!-- </executions> -->
+				<!-- </plugin> -->
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<descriptors>
+							<descriptor>src\main\resources\zip.xml</descriptor>
+						</descriptors>
+						<tarLongFileMode>posix</tarLongFileMode>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.1.1</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>java</goal>
+							</goals>
+						</execution>
+					</executions>
+
+
+					<configuration>
+
+						<mainClass>dasdasdasdas.sampleTest</mainClass>
+						<classpathScope>test</classpathScope>
+					</configuration>
+
+
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+	</build>
+</project>
