@@ -1,0 +1,158 @@
+package sample;
+
+import java.io.FileInputStream;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class sample1 {
+	private static XSSFSheet ExcelWSheet;
+	private static XSSFWorkbook ExcelWBook;
+	private static XSSFCell Cell;
+	public static int iTestStep;
+	public static int iTestLastStep;
+	public static String sTestCaseID;
+	public static String sRunMode;
+	public static String sActionKeyword;
+	public static String sPageObject;
+
+	public static void main(String args[]) throws Exception {
+		setExcelFile("C:\\Users\\Administrator\\Downloads\\KeywordDrivenFramework\\KeywordDrivenFramework\\TestCase.xlsx");
+		execute_TestCase();
+	}
+
+	public static void setExcelFile(String Path) throws Exception {
+		FileInputStream ExcelFile = new FileInputStream(Path);
+		ExcelWBook = new XSSFWorkbook(ExcelFile);
+	}
+
+	// This method is to get the row count used of the excel sheet
+	public static int getRowCount(int SheetName) {
+		ExcelWSheet = ExcelWBook.getSheetAt(SheetName);
+		int number = ExcelWSheet.getLastRowNum() + 1;
+		return number;
+	}
+
+	// This method is to get the Row number of the test case
+	// This methods takes three arguments(Test Case name , Column Number & Sheet
+	// name)
+	public static int getRowContains(String sTestCaseName, int colNum,
+			int SheetName) throws Exception {
+		int i;
+		ExcelWSheet = ExcelWBook.getSheetAt(SheetName);
+		int rowCount = getRowCount(SheetName);
+		for (i = 0; i < rowCount; i++) {
+			System.out.println(getCellData(i, colNum, SheetName));
+			if (getCellData(i, colNum, SheetName).equalsIgnoreCase(
+					sTestCaseName)) {
+				break;
+			}
+		}
+		return i;
+	}
+
+	// This method is to get the count of the test steps of test case
+	// This method takes three arguments (Sheet name, Test Case Id & Test case
+	// row number)
+	public static int getTestStepsCount(int SheetName, String sTestCaseID,
+			int iTestCaseStart) throws Exception {
+		for (int i = iTestCaseStart; i <= getRowCount(SheetName); i++) {
+			System.out.println("sda"+getCellData(i, 0, SheetName));
+			if (!getCellData(i, 0, SheetName).equalsIgnoreCase("")) {
+				if (!sTestCaseID.equals(getCellData(i, 0, SheetName))) {
+					int number = i;
+					return number;
+				}
+			}
+		}
+		ExcelWSheet = ExcelWBook.getSheetAt(SheetName);
+		int number = ExcelWSheet.getLastRowNum() + 1;
+		return number;
+	}
+
+	// This method is to read the test data from the Excel cell
+	// In this we are passing Arguments as Row Num, Col Num & Sheet Name
+	public static String getCellData(int RowNum, int ColNum, int SheetName)
+			throws Exception {
+		ExcelWSheet = ExcelWBook.getSheetAt(SheetName);
+		try {
+			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+			String CellData = Cell.getStringCellValue();
+			return CellData;
+		} catch (Exception e) {
+			return "";
+		}
+	}
+
+	private static void execute_TestCase() throws Exception {
+		// This will return the total number of test cases mentioned in the Test
+		// cases sheet
+		int iTotalTestCases = getRowCount(0);
+		// This loop will execute number of times equal to Total number of test
+		// cases
+		for (int iTestcase = 1; iTestcase <= iTotalTestCases; iTestcase++) {
+			// This is to get the Test case name from the Test Cases sheet
+			// TOOD testCaseID
+			sTestCaseID = getCellData(iTestcase, 0, 0);
+
+			// This is to get the value of the Run Mode column for the current
+			// test case
+			// TODO 2 says colrunmode
+			sRunMode = getCellData(iTestcase, 2, 0);
+			// This is the condition statement on RunMode value
+			// if (sRunMode.equals("Yes")) {
+			// Only if the value of Run Mode is 'Yes', this part of code
+			// will execute
+			iTestStep = getRowContains(sTestCaseID, 0, 0);
+			iTestLastStep = getTestStepsCount(0, sTestCaseID, iTestStep);
+			// This loop will execute number of times equal to Total number
+			// of test steps
+			for (; iTestStep <= iTestLastStep; iTestStep++) {
+				sActionKeyword = getCellData(iTestStep, 3, 0);
+				sPageObject = getCellData(iTestStep, 4, 0);
+				System.out.println(sActionKeyword+"   "+sPageObject);
+				// execute_Actions();
+			}
+			// }
+		}
+	}
+
+}
+
+
+
+
+...............................................................
+ReadGuru99ExcelFile file = new ReadGuru99ExcelFile();
+//        ReadObject object = new ReadObject();
+//        Properties allObjects =  object.getObjectRepository();
+//        UIOperation operation = new UIOperation(webdriver);
+        //Read keyword sheet
+        Sheet guru99Sheet = file.readExcel(System.getProperty("user.dir")+"\\","TestCase.xlsx" , "KeywordFramework");
+      //Find number of rows in excel file
+    	int rowCount = guru99Sheet.getLastRowNum()-guru99Sheet.getFirstRowNum();
+    	//Create a loop over all the rows of excel file to read it
+    	for (int i = 1; i < rowCount+1; i++) {
+    		//Loop over all the rows
+    		Row row = guru99Sheet.getRow(i);
+    		//Check if the first cell contain a value, if yes, That means it is the new testcase name
+    		if(row.getCell(0).toString().length()==0){
+    		//Print testcase detail on console
+    			System.out.println(row.getCell(1).toString()+"----"+ row.getCell(2).toString()+"----"+
+    			row.getCell(3).toString()+"----"+ row.getCell(4).toString());
+    			asd.put(row.getCell(0).toString()+i, row.getCell(1).toString()+"----"+ row.getCell(2).toString()+"----"+
+		    			row.getCell(3).toString()+"----"+ row.getCell(4).toString());
+
+    		//Call perform function to perform operation on UI
+//    			operation.perform(allObjects, row.getCell(1).toString(), row.getCell(2).toString(),
+//    				row.getCell(3).toString(), row.getCell(4).toString());
+    	    }
+    		else{
+    			//Print the new  testcase name when it started
+    				System.out.println("New Testcase->"+row.getCell(0).toString() +" Started");
+    				asd.put(row.getCell(0).toString()+i, row.getCell(1).toString()+"----"+ row.getCell(2).toString()+"----"+
+    		    			row.getCell(3).toString()+"----"+ row.getCell(4).toString());
+ 
+    		}
+    		}
