@@ -3,3 +3,90 @@ public abstract interface Exception
 {
   public abstract Throwable getException();
 }
+
+http://www.ftporasi.com/EyeOnTesting/QC/Excel%20Reports/Test%20Plan%20Report/For%20Educational%20Purposes%20Only%20-%20Test%20Plan%20Report.pdf
+
+Dim tdc
+Dim server
+Dim domain
+Dim project
+Dim projUserName
+Dim projPassword
+Sub LoginToQC 'Modify for your own Environment
+ server = "http://QCSERVER:8081/qcbin/"
+ domain = "Default"
+ project = "QualityCenter_Demo"
+ projUserName = "qcadmin"
+ projPassword = "qcadmin"
+ tdc_login
+End Sub
+Sub QC_PostProcessing()
+ Dim MainWorksheet As Worksheet
+ ' Make sure your worksheet name matches!
+ Set MainWorksheet = ActiveWorkbook.Worksheets("Query1")
+ Dim DataRange As Range
+ Set DataRange = MainWorksheet.UsedRange
+ ' Now that you have the data in DataRange you can process it.
+ LoginToQC
+ totalrows = MainWorksheet.UsedRange.Rows.Count
+ col = 1 'Test Id is in column 1
+ For x = 1 to totalrows-1
+ CelVal = Tests_Path(MainWorksheet.Cells(x+1, col).Value)
+ MainWorksheet.Cells(x+1,col+1).Value = CelVal
+ Next x
+ ResizeSheet
+ LogoutOfQC
+End Sub
+Function tdc_login()
+Err.Description = ""
+ Set tdc = CreateObject("tdapiole80.tdconnection.1")
+ If Not Err.Description = "" Then
+ MsgBox " 0 - Create: " & Err.Description
+ End If
+ Err.Description = ""
+ tdc.InitConnectionEx Server
+ If Not Err.Description = "" Then
+ MsgBox " 1 - InitConnectEx: " & Err.Description
+ End If
+ Err.Description = ""
+ tdc.Login projUserName, projPassword
+ If Not Err.Description = "" Then
+ MsgBox " 2 - Login: " & Err.Description
+ End If
+ Err.Description = ""
+ tdc.Connect CStr(domain), CStr(project)
+ If Not Err.Description = "" Then
+ MsgBox " 2 - Login: " & Err.Description
+ End If
+End Function
+Sub LogoutOfQC
+ If tdc.Connected Then
+ tdc.Disconnect
+ End If
+ If tdc.LoggedIn Then
+ tdc.Logout
+ End If
+ tdc.ReleaseConnection
+ Set tdc = Nothing
+End Sub
+Function Tests_Path(TESTID)
+ Set com = tdc.Command
+ com.CommandText = "Select ts_subject from test where ts_test_id=" & CStr(TESTID)
+ Set RecSet = com.Execute
+ subjectid = RecSet.FieldValue("TS_SUBJECT")
+ Set myTMng = tdc.TreeManager
+ mySPath = myTMng.NodePath(subjectid)
+ Tests_Path = mySPath
+End Function
+Sub ResizeSheet()
+ 'Bold Titles in First Row
+  Rows("1:1").Select
+ Selection.Font.Bold = True
+ 'Stip to ensure Tests are added underneath "Subject"
+ Columns("B:B").Select
+ Selection.Replace What:="Subject\", Replacement:=""
+ 'Size Columns
+ Cells.Select
+ Selection.Columns.AutoFit
+ Range("A1").Select
+End Sub
