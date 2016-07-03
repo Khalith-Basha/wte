@@ -90,3 +90,4 @@ Sub ResizeSheet()
  Selection.Columns.AutoFit
  Range("A1").Select
 End Sub
+http://alm-help.saas.hpe.com/en/12.50/online_help/Content/UG/ui_menu_excel_reports.htm
