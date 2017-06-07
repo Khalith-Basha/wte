@@ -1,0 +1,957 @@
+package sa;
+
+import java.rmi.RemoteException;
+
+import org.apache.axis2.AxisFault;
+
+import net.webservicex.www.GlobalWeatherStub;
+import net.webservicex.www.GlobalWeatherStub.GetCitiesByCountry;
+import net.webservicex.www.GlobalWeatherStub.GetCitiesByCountryResponse;
+import net.webservicex.www.GlobalWeatherStub.GetWeather;
+import net.webservicex.www.GlobalWeatherStub.GetWeatherResponse;
+
+public class asda {
+	public static void main(String args[]) throws RemoteException {
+//	GlobalWeatherStub ge = new GlobalWeatherStub();
+//	GetCitiesByCountry get = new GetCitiesByCountry();
+//	get.setCountryName("US");
+//	
+//	GetCitiesByCountryResponse we = ge.getCitiesByCountry(get);
+//	String res =we.getGetCitiesByCountryResult();
+//	System.out.println(res);
+		
+		GlobalWeatherStub ge = new GlobalWeatherStub();
+			GetWeather ge2 = new GetWeather();
+			ge2.setCityName("Derby");
+			ge2.setCountryName("United Kingdom");
+			
+			GetWeatherResponse a =ge.getWeather(ge2);
+			System.out.println(a.getGetWeatherResult());
+			
+	}
+}
+
+
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webserviceX.NET">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetCitiesByCountry>
+         <!--Optional:-->
+         <web:CountryName>United Kingdom</web:CountryName>
+      </web:GetCitiesByCountry>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Body>
+      <GetCitiesByCountryResponse xmlns="http://www.webserviceX.NET">
+         <GetCitiesByCountryResult><![CDATA[<NewDataSet>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Belfast / Aldergrove Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Belfast / Harbour</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Eglinton / Londonderr</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Birmingham / Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Derby</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Coventry Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Leicester</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Staverton Private</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Northampton / Sywell</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Tatenhill</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Nottingham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Halfpenny Green</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Shobdon</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Turweston</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wellesbourne Mountford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Manchester / Barton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Manchester Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Woodford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Sandtoft</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Sherburn-In-Elmet</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Caernarfon</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Fenland</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Sturgate</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Sleap</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Welshpool</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Brawdy</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Plymouth</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Chivenor</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Saint Mawgan</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Upavon</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Kemble</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lyneham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Boscombe Down</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Netheravon</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Predannack</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Portland / Rnas</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Culdrose</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wroughton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Merryfield</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>St Athan</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Yeovilton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cardiff/tremorfa Heliport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Haverfordwest</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cardiff-Wales Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Swansea</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bristol / Lulsgate</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Liverpool / John Lennon Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Luton Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Compton Abbas</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lands End / St Just</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Plymouth / Roborough</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Scilly, Saint Mary'S</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Yeovil / Westland</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bournemouth Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Southampton / Weather Centre</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bembridge</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Penzance Heliport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lasham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Isle Of Wight / Sandown</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Thruxton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Popham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Chichester / Goodwood</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Alderney / Channel Island</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Guernsey Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Jersey Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Shoreham Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Biggin Hill</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bognor Regis</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Challock</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lashenden / Headcorn</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>London / Gatwick Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Redhill</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bodmin</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>London City Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Denham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Farnborough</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Panshanger</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Blackbushe</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>London / Heathrow Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>White Waltham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Old Sarum</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>London / Westland Heliport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Fowlmere</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Southend-On-Sea</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lydd Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Manston Civil</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Hucknall</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Brough</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Carlisle</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Retford / Gamston</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Netherthorpe</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Samlesbury</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Blackpool Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Humberside</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Barrow / Walney Island</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Leeds And Bradford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Warton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Hawarden</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Isle Of Man / Ronaldsway Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Newcastle</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Tees-Side</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wickenby</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>East Midlands</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Llanbedr</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Ternhill</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Spadeadam</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Pembrey Sands</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Mona</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Shawbury</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Valley</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Woodvale</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>West Freugh</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Kirkwall Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Sumburgh Cape</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wick</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Aberdeen / Dyce</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Inverness / Dalcross</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Glasgow Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Edinburgh Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Prestwick Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Benbecula</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Scatsa / Shetland Island</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Dundee / Riverside</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Stornoway</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Tiree</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Unst Island</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Tain Range</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Machrihanish</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Kinloss</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Leuchars</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Boulmer</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lossiemouth</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>London Weather Centre</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bracknell / Beaufort Park</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Shipdham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bedford / Castle Mill</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cambridge</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Great Yarmouth / North Denes</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Ipswich</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Peterborough / Conington</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Stapleford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Norwich Weather Centre</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Seething</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Hethel</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Andrewsfield</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Beccles ( Ellough )</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bourn</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Crowfield</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Peterborough / Sibson</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Earls Colne</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Stansted Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Duxford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Bedford / Thurleigh</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Clacton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>North Weald</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Sheffield City</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Aylesbury / Thame</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wycombe Air Park / Booker</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cranfield</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Dunsfold</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Exeter Airport</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Fairoaks</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Filton / Bristol</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Hatfield</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Leavesden</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Oxford / Kidlington</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Rochester</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Perranporth</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Elstree</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Oaksey Park</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Benson</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Aberporth</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Farnborough Military</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lakenheath</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Manston Military</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Mildenhall</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Colerne</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Lee On Solent</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wattisham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wyton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Fairford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Brize Norton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Odiham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Middle Wallop</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cosford</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Halton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Northolt</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Alconbury Royal Air Force Base</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Coningsby</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Dishforth</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Leeming</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Church Fenton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Honington</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Finningley</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cottesmore</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Newton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Scampton</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wittering</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Linton-On-Ouse</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Leconfield</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Waddington</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Topcliffe</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Coltishall</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Cranwell</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Barkston Heath</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Holbeach</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Marham</City>
+  </Table>
+  <Table>
+    <Country>United Kingdom</Country>
+    <City>Wainfleet</City>
+  </Table>
+</NewDataSet>]]></GetCitiesByCountryResult>
+      </GetCitiesByCountryResponse>
+   </soap:Body>
+</soap:Envelope>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:web="http://www.webserviceX.NET">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <web:GetWeather>
+         <!--Optional:-->
+         <web:CityName>Derby</web:CityName>
+         <!--Optional:-->
+         <web:CountryName>United Kingdom</web:CountryName>
+      </web:GetWeather>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <soap:Body>
+      <GetWeatherResponse xmlns="http://www.webserviceX.NET">
+         <GetWeatherResult>Data Not Found</GetWeatherResult>
+      </GetWeatherResponse>
+   </soap:Body>
+</soap:Envelope>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Mozido-SOAP-Automation</groupId>
+  <artifactId>Mozido-SOAP-Automation</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+<!--   <dependencies> -->
+<!--   	<dependency> -->
+<!--   		<groupId>net.sourceforge.jexcelapi</groupId> -->
+<!--   		<artifactId>jxl</artifactId> -->
+<!--   		<version>2.6.12</version> -->
+<!--   		<type>jar</type> -->
+<!--   		<scope>compile</scope> -->
+<!--   	</dependency> -->
+<!--   	<dependency> -->
+<!--   		<groupId>javax.mail</groupId> -->
+<!--   		<artifactId>mail</artifactId> -->
+<!--   		<version>1.4.5</version> -->
+<!--   		<type>jar</type> -->
+<!--   		<scope>compile</scope> -->
+<!--   	</dependency> -->
+<!--   	<dependency> -->
+<!--   		<groupId>com.thoughtworks.xstream</groupId> -->
+<!--   		<artifactId>xstream</artifactId> -->
+<!--   		<version>1.4.3</version> -->
+<!--   		<type>jar</type> -->
+<!--   		<scope>compile</scope> -->
+<!--   	</dependency> -->
+<!--   	<dependency> -->
+<!--   		<groupId>org.apache.axis2</groupId> -->
+<!--   		<artifactId>axis2-adb</artifactId> -->
+<!--   		<version>1.6.2</version> -->
+<!--   		<type>jar</type> -->
+<!--   		<scope>compile</scope> -->
+<!--   	</dependency> -->
+<!--   	<dependency> -->
+<!--   		<groupId>org.apache.axis2</groupId> -->
+<!--   		<artifactId>axis2</artifactId> -->
+<!--   		<version>1.6.2</version> -->
+<!--   		<type>pom</type> -->
+<!--   		<scope>compile</scope> -->
+<!--   	</dependency> -->
+<!--   	<dependency> -->
+<!--   		<groupId>org.apache.axis2</groupId> -->
+<!--   		<artifactId>axis2-kernel</artifactId> -->
+<!--   		<version>1.6.2</version> -->
+<!--   		<type>jar</type> -->
+<!--   		<scope>compile</scope> -->
+<!--   	</dependency> -->
+<!--   </dependencies> -->
+</project>
