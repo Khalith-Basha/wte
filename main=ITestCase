@@ -1,0 +1,6 @@
+package main;
+import classes.RunFactory;
+
+public abstract interface ITestCase extends HasAttachmentFeature {
+	public abstract RunFactory getRunFactory();
+}

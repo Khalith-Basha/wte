@@ -1,0 +1,6 @@
+package main;
+import classes.AttachmentFactory;
+
+public abstract interface HasAttachmentFeature {
+	public abstract AttachmentFactory getAttachments();
+}

@@ -1,0 +1,12 @@
+package collection;
+
+import java.util.ArrayList;
+
+public class ListWrapper<Object>
+  extends ArrayList<Object>
+{
+  public int getCount()
+  {
+    return size();
+  }
+}

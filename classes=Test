@@ -1,0 +1,26 @@
+package classes;
+
+import com.jacob.com.Dispatch;
+
+public class Test
+{
+  private Dispatch tsTest;
+  private Dispatch test;
+  
+  public Test(Dispatch tsTest)
+  {
+    this.tsTest = tsTest;
+    this.test = init();
+  }
+  
+  private Dispatch init()
+  {
+    Dispatch test = Dispatch.get(this.tsTest, "Test").toDispatch();
+    return test;
+  }
+  
+  public DesignStepFactory getDesignStepFactory()
+  {
+    return new DesignStepFactory(this.test);
+  }
+}
